@@ -1,5 +1,5 @@
 class asset:
-    def _init_(self,name:str,value:float,leverage_multiplier:int):
+    def __init__(self,name:str,value:float,leverage_multiplier:int):
         """
         the constructor initializes a high value assett
         """
@@ -9,7 +9,7 @@ class asset:
     
     def get_value(self):
         """ getter method to access data securely"""
-        return(self.value)
+        return self.value
     def calculate_power(self):
         """calculates the total financial leverage of this assett"""
         return self.value * self.leverage_multiplier
@@ -20,13 +20,40 @@ class asset:
         print(f"leverage_multiplier: {self.leverage_multiplier}")
         print(f"total leverage : {self.leverage_multiplier * self.value}")
 
-# main code block 
-if __name__ == "__main__":
-    software_ip = asset("automation engine",50000, 10)
-    media_leverage= asset("distribution channel",20000,5)
+class portfolio:
+    def __init__(self,owner_name:str):
+        self.owner_name=owner_name
+        self.assets = []
+    def add_assets(self,asset:asset):
+        self.assets.append(asset)
+        print(f"[system log] asset {asset.name} added to {self.owner_name}'s portfolio")
+    def calculate_total_net_worth(self):
+        net_worth=0
+        for i in self.assets:
+            net_worth+=net_worth + i.get_value()
+        return net_worth
+    def calculate_total_leverage_power(self):
+        total_leverage=0
+        for i in self.assets:
+            total_leverage+=total_leverage + i.calculate_power()
+        return total_leverage
+    
+    def display_portfolio_summary(self):
+        print("portfolio")
+        print(f"owner name : {self.owner_name}")
+        print(f"total unique assets : {len(self.assets)}")
+        print(f"liquid base value : {self.calculate_total_net_worth():}")
+        print(f"total leverage power : {self.calculate_total_leverage_power():,}")
+        print(f"===================================\n")
 
-#execution block
-software_ip.display_profile()
-media_leverage.display_profile()
+if __name__=="__main__":
+    my_empire=portfolio("future billionaire")
+    software_ip=asset("ai automation", 7500, 15)
+    saas_platform=asset("micro-saas product", 30000,8)
+    media_network=asset("tech newsletter channel", 15000,4)
 
-#end
+    my_empire.add_assets(software_ip)
+    my_empire.add_assets(saas_platform)
+    my_empire.add_assets(media_network)
+
+    my_empire.display_portfolio_summary()
