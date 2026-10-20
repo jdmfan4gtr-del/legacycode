@@ -45,6 +45,7 @@ class portfolio:
         print(f"liquid base value : {self.calculate_total_net_worth():}")
         print(f"total leverage power : {self.calculate_total_leverage_power():,}")
         print(f"===================================\n")
+        print("***************************************")
 
 if __name__=="__main__":
     my_empire=portfolio("future billionaire")
