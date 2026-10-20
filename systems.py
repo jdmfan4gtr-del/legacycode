@@ -1,3 +1,4 @@
+
 class asset:
     def __init__(self,name:str,value:float,leverage_multiplier:int):
         """
@@ -47,14 +48,18 @@ class portfolio:
         print(f"===================================\n")
         print("***************************************")
 
-if __name__=="__main__":
-    my_empire=portfolio("future billionaire")
-    software_ip=asset("ai automation", 7500, 15)
-    saas_platform=asset("micro-saas product", 30000,8)
-    media_network=asset("tech newsletter channel", 15000,4)
+from fetcher import datafetcher
 
-    my_empire.add_assets(software_ip)
-    my_empire.add_assets(saas_platform)
-    my_empire.add_assets(media_network)
+if __name__=="__main__":
+    market_intelligence=datafetcher()
+    live_rates=market_intelligence.fetch_market_prices()
+    btc_usd_rate=live_rates.get('bitcoin',{}).get('usd',65000.0)
+    eth_usd_rate=live_rates.get('ethereum',{}).get('usd',35000.0)
+
+    my_empire=portfolio("future billionaire")
+    bitcoin_reserve=asset("bitcoin reserve",(2.5 * btc_usd_rate), 12)
+    eth_reserve=asset("ethereum reserve",(15.0 * eth_usd_rate),8)
+    my_empire.add_assets(bitcoin_reserve)
+    my_empire.add_assets(eth_reserve)
 
     my_empire.display_portfolio_summary()
