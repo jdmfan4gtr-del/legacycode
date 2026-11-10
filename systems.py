@@ -48,10 +48,10 @@ class portfolio:
         print(f"===================================\n")
         print("***************************************")
 
-from fetcher import datafetcher
+import fetcher
 
 if __name__=="__main__":
-    market_intelligence=datafetcher()
+    market_intelligence=fetcher.datafetcher()
     live_rates=market_intelligence.fetch_market_prices()
     btc_usd_rate=live_rates.get('bitcoin',{}).get('usd',65000.0)
     eth_usd_rate=live_rates.get('ethereum',{}).get('usd',35000.0)
